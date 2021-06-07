@@ -1,4 +1,5 @@
 'use strict';
+const urlCafeterias = 'http://localhost:8077/api/cafeterias';
 
 const cartButton = document.querySelector("#cart-button"),
 	modal = document.querySelector(".modal"),
@@ -47,7 +48,8 @@ const getData = async function(url) {
 
 
 const validName = function(str) {
-	const nameReg = /^[a-zA-Z][a-zA-z0-9-_\.]{1,20}$/;
+	// const nameReg = /^[а-яА-Я][a-zA-z0-9-_\.]{1,20}$/;
+	const nameReg = /^[а-яА-я][а-яА-я0-9-_\.]{1,20}$/;
 	return nameReg.test(str);
 };
 
@@ -87,6 +89,7 @@ function authorized () {
 		buttonAuth.style.display = "";
 		userName.style.display = "";
 		buttonOut.style.display = "";
+		cartButton.style.display = "";
 		buttonOut.removeEventListener("click", logOut);
 		checkAuth();
 		returnMain();		
@@ -145,7 +148,7 @@ function checkAuth() {
 
 
 function createCardRestaurant({ image, kitchen, name, price, stars, 
-								products, time_of_delivery: timeOfDelivery }) {
+								products, timeOfDelivery: timeOfDelivery }) {
 
 	const card = document.createElement("a");
 	card.className = "card card-restaurant";
@@ -362,9 +365,9 @@ function changeCount (event) {
 
 
 function init() {
-	getData("./db/partners.json").then(function(data){
+	getData(sendRequest('GET',urlCafeterias).then(function(data){
 		data.forEach(createCardRestaurant);
-	});
+	}));
 
 	cardsRestaurants.addEventListener("click", openGoods);
 
@@ -398,6 +401,27 @@ function init() {
 			},
 			sliderPerView: 1
 		});
+}
+
+function sendRequest(method, url, body = null) {
+	return new Promise((resolve, reject) => {
+		const xhr = new XMLHttpRequest()
+		xhr.open(method, url)
+
+		xhr.responseType = 'json'
+		xhr.setRequestHeader('Content-Type', 'application/json')
+		xhr.onload = () => {
+			if (xhr.status >= 400) {
+				reject(xhr.response)
+			} else {
+				resolve(xhr.response)
+			}
+		}
+		xhr.onerror = () => {
+			reject(xhr.response)
+		}
+		xhr.send(JSON.stringify(body))
+	})
 }
 
 init();

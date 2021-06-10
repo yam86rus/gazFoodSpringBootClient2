@@ -147,12 +147,13 @@ function checkAuth() {
 }
 
 
-function createCardRestaurant({ image, kitchen, name, price, stars, 
+function createCardRestaurant({ id,image, kitchen, name, price, stars,
 								products, timeOfDelivery: timeOfDelivery }) {
 
 	const card = document.createElement("a");
 	card.className = "card card-restaurant";
 	card.products = products;
+	card.id = id;
 	card.info = [name, price, stars, kitchen];
 
 	card.insertAdjacentHTML("beforeend", `
@@ -221,7 +222,10 @@ function openGoods(event) {
 			minPrice.textContent = `От ${price} Р`;
 			category.textContent = "";
 
-			getData(`./db/${restaurant.products}`).then(function(data) {
+			// getData(`./db/${restaurant.id}`).then(function(data) {
+			// sendRequest('GET',urlDishes+`${restaurant.id}`)
+			// getData(sendRequest('GET','http://localhost:8077/api/trololo/1'+`${restaurant.id}`)).then(function(data) {
+			getData(`http://localhost:8077/api/trololo/${restaurant.id}`).then(function(data) {
 				data.forEach(createCardGood);
 			});
 		}

@@ -1,5 +1,5 @@
 'use strict';
-const urlCafeterias = 'http://169.168.9.136:8077/api/cafeterias';
+const urlCafeterias = 'https://169.168.9.136:8077/api/cafeterias';
 
 const cartButton = document.querySelector("#cart-button"),
 	modal = document.querySelector(".modal"),
@@ -225,7 +225,7 @@ function openGoods(event) {
 			// getData(`./db/${restaurant.id}`).then(function(data) {
 			// sendRequest('GET',urlDishes+`${restaurant.id}`)
 			// getData(sendRequest('GET','http://localhost:8077/api/trololo/1'+`${restaurant.id}`)).then(function(data) {
-			getData(`http://169.168.9.136:8077/api/trololo/${restaurant.id}`).then(function(data) {
+			getData(`https://169.168.9.136:8077/api/trololo/${restaurant.id}`).then(function(data) {
 				data.forEach(createCardGood);
 			});
 		}

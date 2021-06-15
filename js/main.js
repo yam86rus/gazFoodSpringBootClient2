@@ -172,7 +172,8 @@ function createCardRestaurant({
 				<div class="rating">
 					${stars}
 				</div>
-				<div class="price">От ${price} ₽</div>
+<!--				<div class="price">От ${price} ₽</div>-->
+				<div class="price">От ${price}</div>
 				<div class="category">${kitchen}</div>
 			</div>
 		</div>
@@ -181,7 +182,7 @@ function createCardRestaurant({
 }
 
 
-function createCardGood({description, image, name, price, id}) {
+function createCardGood({description, image, name, price, id,cafeteriaId}) {
     const card = document.createElement("div");
     card.className = "card";
 
@@ -192,8 +193,8 @@ function createCardGood({description, image, name, price, id}) {
 				<h3 class="card-title card-title-reg">${name}</h3>
 			</div>
 			<div class="card-info">
-				<div class="ingredients">${description}
-				</div>
+				<div class="ingredients">${description}</div>
+				<div class="card-cafeteriaId">${cafeteriaId}</div>
 			</div>
 			<div class="card-buttons">
 				<button class="button button-primary button-add-cart" id="${id}">
@@ -201,6 +202,7 @@ function createCardGood({description, image, name, price, id}) {
 					<span class="button-cart-svg"></span>
 				</button>
 				<strong class="card-price card-price-bold">${price} ₽</strong>
+<!--				<strong class="card-price card-price-bold">${price}</strong>-->
 			</div>
 		</div>
 	`);
@@ -303,7 +305,8 @@ function addToCart(event) {
     if (buttonAddToCard) {
         const card = target.closest(".card");
         const title = card.querySelector(".card-title-reg").textContent;
-        const cost = card.querySelector(".card-price").textContent;
+        const cost = parseFloat(card.querySelector(".card-price").textContent);
+        const cafeteriaId = parseInt(card.querySelector(".card-cafeteriaId").textContent);
         const id = buttonAddToCard.id;
 
         const food = cart.find(function (item) {
@@ -317,6 +320,7 @@ function addToCart(event) {
                 id: id,
                 title: title,
                 cost: cost,
+                cafeteriaId: cafeteriaId,
                 count: 1
             });
         }
@@ -348,7 +352,7 @@ function renderCart() {
         return result + parseFloat(item.cost) * item.count;
     }, 0);
 
-    modalPrice.textContent = totalPrice + " ₽";
+    modalPrice.textContent = totalPrice;// + " ₽";
 }
 
 

@@ -18,10 +18,11 @@
             <img src="img/icon/logo2.svg" alt="Logo"/>
         </a>
         <label class="address">
-<!--            <input type="text" class="input input-address" placeholder="Адрес доставки"/>-->
+            <!--            <input type="text" class="input input-address" placeholder="Адрес доставки"/>-->
         </label>
         <div class="buttons">
             <span class="user-name"></span>
+            <span class="user-phone"></span>
             <button class="button button-primary button-auth">
                 <span class="button-auth-svg"></span>
                 <span class="button-text">Войти</span>
@@ -107,15 +108,16 @@
     <div class="container">
         <div class="footer-block">
             <img src="img/icon/logo2.svg" alt="logo" class="logo footer-logo"/>
-<!--            <nav class="footer-nav">-->
-<!--                <a href="#" class="footer-link">Ресторанам </a>-->
-<!--                <a href="#" class="footer-link">Курьерам</a>-->
-<!--                <a href="#" class="footer-link">Пресс-центр</a>-->
-<!--                <a href="#" class="footer-link">Контакты</a>-->
-<!--            </nav>-->
+            <!--            <nav class="footer-nav">-->
+            <!--                <a href="#" class="footer-link">Ресторанам </a>-->
+            <!--                <a href="#" class="footer-link">Курьерам</a>-->
+            <!--                <a href="#" class="footer-link">Пресс-центр</a>-->
+            <!--                <a href="#" class="footer-link">Контакты</a>-->
+            <!--            </nav>-->
             <div class="social-links">
-                <a href="http://instagram.com/gazprom_pitanie_surgut_186" class="social-link"><img src="img/social/instagram.svg" alt="instagram"/></a>
-<!--                <a href="#" class="social-link"><img src="img/social/fb.svg" alt="facebook"/></a>-->
+                <a href="http://instagram.com/gazprom_pitanie_surgut_186" class="social-link"><img
+                        src="img/social/instagram.svg" alt="instagram"/></a>
+                <!--                <a href="#" class="social-link"><img src="img/social/fb.svg" alt="facebook"/></a>-->
                 <a href="https://vk.com/public186894462" class="social-link"><img src="img/social/vk.svg" alt="vk"/></a>
             </div>
             <!-- /.social-links -->
@@ -191,15 +193,19 @@
         <button class="close-auth">&times;</button>
         <form id="logInForm">
             <fieldset class="modal-body">
-                <legend class="modal-title">Авторизация</legend>
+<!--                <legend class="modal-title">регистрация</legend>-->
                 <label class="label-auth">
-                    <span>Логин</span>
-                    <input id="login" type="text" value="Гость">
+                    <span>Введите ваше имя</span>
+                    <input id="login" type="text" value="Гость" >
                 </label>
-<!--                <label class="label-auth">-->
-<!--                    <span>Пароль</span>-->
-<!--                    <input id="password" type="password">-->
-<!--                </label>-->
+                <label class="label-auth">
+                    <span>Телефон</span>
+                    <input class="tel" type="text" placeholder="+7(922) 333-44-55">
+                </label>
+                <!--                <label class="label-auth">-->
+                <!--                    <span>Пароль</span>-->
+                <!--                    <input id="password" type="password">-->
+                <!--                </label>-->
             </fieldset>
             <!-- /.modal-body -->
             <div class="modal-footer">

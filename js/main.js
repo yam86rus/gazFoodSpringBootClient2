@@ -182,7 +182,7 @@ function createCardRestaurant({
 }
 
 
-function createCardGood({description, image, name, price, id,cafeteriaId}) {
+function createCardGood({description, image, name, price, id, cafeteriaId}) {
     const card = document.createElement("div");
     card.className = "card";
 
@@ -194,7 +194,7 @@ function createCardGood({description, image, name, price, id,cafeteriaId}) {
 			</div>
 			<div class="card-info">
 				<div class="ingredients">${description}</div>
-				<div class="card-cafeteriaId">${cafeteriaId}</div>
+				<div style="display: none" class="card-cafeteriaId">${cafeteriaId}</div>
 			</div>
 			<div class="card-buttons">
 				<button class="button button-primary button-add-cart" id="${id}">
@@ -308,6 +308,9 @@ function addToCart(event) {
         const cost = parseFloat(card.querySelector(".card-price").textContent);
         const cafeteriaId = parseInt(card.querySelector(".card-cafeteriaId").textContent);
         const id = buttonAddToCard.id;
+        const cafeteriaName = restaurantTitle.innerHTML;
+        const userName = document.querySelector(".user-name").textContent;
+
 
         const food = cart.find(function (item) {
             return item.id === id;
@@ -321,7 +324,9 @@ function addToCart(event) {
                 title: title,
                 cost: cost,
                 cafeteriaId: cafeteriaId,
-                count: 1
+                count: 1,
+                cafeteriaName: cafeteriaName,
+                userName: userName,
             });
         }
     }
@@ -457,9 +462,48 @@ buttonOrder.addEventListener("click", function () {
     // sendRequest('POST', urlOrders, requestBody)
     sendRequest('POST', urlOrders, data);
     localStorage.removeItem("allCart");
-
+    buttonClearCart.click();
+    console.log('userName ' + userName.innerHTML);
     console.log('Request ушел');
 });
 
+
+// маска ввода сотового
+window.addEventListener("DOMContentLoaded", function() {
+    [].forEach.call( document.querySelectorAll('.tel'), function(input) {
+        var keyCode;
+        function mask(event) {
+            event.keyCode && (keyCode = event.keyCode);
+            var pos = this.selectionStart;
+            if (pos < 3) event.preventDefault();
+            var matrix = "+7 (___) ___ __ __",
+                i = 0,
+                def = matrix.replace(/\D/g, ""),
+                val = this.value.replace(/\D/g, ""),
+                new_value = matrix.replace(/[_\d]/g, function(a) {
+                    return i < val.length ? val.charAt(i++) || def.charAt(i) : a
+                });
+            i = new_value.indexOf("_");
+            if (i != -1) {
+                i < 5 && (i = 3);
+                new_value = new_value.slice(0, i)
+            }
+            var reg = matrix.substr(0, this.value.length).replace(/_+/g,
+                function(a) {
+                    return "\\d{1," + a.length + "}"
+                }).replace(/[+()]/g, "\\$&");
+            reg = new RegExp("^" + reg + "$");
+            if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = new_value;
+            if (event.type == "blur" && this.value.length < 5)  this.value = ""
+        }
+
+        input.addEventListener("input", mask, false);
+        input.addEventListener("focus", mask, false);
+        input.addEventListener("blur", mask, false);
+        input.addEventListener("keydown", mask, false)
+
+    });
+
+});
 init();
 

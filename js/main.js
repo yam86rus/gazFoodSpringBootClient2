@@ -11,7 +11,9 @@ const cartButton = document.querySelector("#cart-button"),
     closeAuth = document.querySelector(".close-auth"),
     logInForm = document.querySelector("#logInForm"),
     loginInput = document.querySelector("#login"),
+    phoneInput = document.querySelector("#phone"),
     userName = document.querySelector(".user-name"),
+    userPhone = document.querySelector(".user-phone"),
     buttonOut = document.querySelector(".button-out"),
     buttonOrder = document.querySelector(".button-order"),
     cardsRestaurants = document.querySelector(".cards-restaurants"),
@@ -31,6 +33,7 @@ const cartButton = document.querySelector("#cart-button"),
 
 
 let login = localStorage.getItem("logName");
+let phone = localStorage.getItem("logPhone");
 
 const cart = JSON.parse(localStorage.getItem("allCart")) || [];
 
@@ -88,6 +91,7 @@ function authorized() {
     function logOut() {
         login = null;
         localStorage.removeItem("logName");
+        localStorage.removeItem("logPhone");
 
         buttonAuth.style.display = "";
         userName.style.display = "";
@@ -118,6 +122,7 @@ function notAuthorized() {
     function logIn(event) {
         event.preventDefault();
         login = (loginInput.value).trim();
+        phone = (phoneInput.value).trim();
 
         if (!validName(login)) {
             event.preventDefault();
@@ -125,6 +130,8 @@ function notAuthorized() {
         } else {
 
             localStorage.setItem("logName", login);
+            localStorage.setItem("logPhone", phone);
+
 
             toggleModalAuth();
             buttonAuth.removeEventListener("click", toggleModalAuth);
@@ -310,6 +317,7 @@ function addToCart(event) {
         const id = buttonAddToCard.id;
         const cafeteriaName = restaurantTitle.innerHTML;
         const userName = document.querySelector(".user-name").textContent;
+        const userPhone = localStorage.getItem("logPhone");
 
 
         const food = cart.find(function (item) {
@@ -327,6 +335,7 @@ function addToCart(event) {
                 count: 1,
                 cafeteriaName: cafeteriaName,
                 userName: userName,
+                userPhone:userPhone
             });
         }
     }

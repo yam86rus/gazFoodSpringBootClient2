@@ -1,7 +1,7 @@
 'use strict';
-const urlCafeterias = 'http://169.168.9.136:8077/api/cafeterias';
-const urlDishes = 'http://169.168.9.136:8077/api/trololo/';
-const urlOrders = 'http://169.168.9.136:8077/api/orders';
+const urlCafeterias = 'http://localhost:8077/api/cafeterias';
+const urlDishes = 'http://localhost:8077/api/trololo/';
+const urlOrders = 'http://localhost:8077/api/orders';
 
 const cartButton = document.querySelector("#cart-button"),
     modal = document.querySelector(".modal"),
@@ -350,7 +350,7 @@ function renderCart() {
         const itemCart = `
 			<div class="food-row">
 				<span class="food-name">${title}</span>
-				<strong class="food-price">${cost}</strong>
+				<strong class="food-price">${cost} ₽</strong>
 				<div class="food-counter">
 					<button class="counter-button counter-minus" data-id="${id}">-</button>
 					<span class="counter">${count}</span>
@@ -366,7 +366,7 @@ function renderCart() {
         return result + parseFloat(item.cost) * item.count;
     }, 0);
 
-    modalPrice.textContent = totalPrice;// + " ₽";
+    modalPrice.textContent = totalPrice + " ₽";
 }
 
 

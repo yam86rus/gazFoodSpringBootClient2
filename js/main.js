@@ -29,6 +29,7 @@ const cartButton = document.querySelector("#cart-button"),
     inputSearch = document.querySelector(".input-search"),
     modalBody = document.querySelector(".modal-body"),
     modalPrice = document.querySelector(".modal-pricetag"),
+    basketCount = document.querySelector(".basketCount"),
     buttonClearCart = document.querySelector(".clear-cart");
 
 
@@ -340,7 +341,15 @@ function addToCart(event) {
         }
     }
     saveCart();
+    basketCount.innerHTML = getTotalCount();
 }
+function getTotalCount(){
+    const totalCount = cart.reduce(function (result, item) {
+        return result + item.count;
+    }, 0);
+    return totalCount;
+}
+
 
 
 function renderCart() {
@@ -366,7 +375,10 @@ function renderCart() {
         return result + parseFloat(item.cost) * item.count;
     }, 0);
 
+
+
     modalPrice.textContent = totalPrice + " ₽";
+    basketCount.innerHTML = getTotalCount();
 }
 
 

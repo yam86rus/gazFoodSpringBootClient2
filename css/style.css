@@ -90,12 +90,24 @@ button {
     border: 1px solid #1890ff;
     color: #fff;
     margin-right: 10px;
+    border-radius: 3px;
 }
 
 .button-primary:hover {
     background: #ffffff;
     border: 1px solid #d9d9d9;
     color: #595959;
+    transition: background .1s linear;
+}
+
+.button-primary:hover .button-cart-numbers {
+    background-color: #fff;
+    color: #fff;
+}
+
+.button-primary:active {
+    transition: background .1s linear;
+    background: #1890ff;
 }
 
 .button-icon {
@@ -131,6 +143,23 @@ button {
     mask: url("../img/icon/shopping-cart.svg") no-repeat 50% 50%;
     background-repeat: no-repeat;
 }
+
+.button-cart-numbers {
+    position: relative;
+    background-color: #1890ff;
+    text-align: center;
+    border-radius: 10px;
+    min-width: 18px;
+    padding: 0 5px;
+    height: 18px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 18px;
+    top: 10px;
+    left: 12px;
+}
+
 
 .button-primary .button-cart-svg {
     background-color: #fff;
@@ -262,7 +291,6 @@ button {
     display: flex;
     flex-direction: column;
 }
-
 
 
 .restaurants .card-text {
@@ -609,7 +637,6 @@ button {
     }
 
 
-
     .pizza {
         padding: 50px;
         background-size: 500px;
@@ -630,7 +657,6 @@ button {
     .sushi {
         background-position: top 30px right -175px;
     }
-
 
 
     .promo-text {

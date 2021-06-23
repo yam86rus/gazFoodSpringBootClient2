@@ -8,7 +8,9 @@ const cartButton = document.querySelector("#cart-button"),
     close = document.querySelector(".close"),
     buttonAuth = document.querySelector(".button-auth"),
     modalAuth = document.querySelector(".modal-auth"),
+    modalInfo = document.querySelector(".modal-info"),
     closeAuth = document.querySelector(".close-auth"),
+    closeInfo = document.querySelector(".close-info"),
     logInForm = document.querySelector("#logInForm"),
     loginInput = document.querySelector("#login"),
     phoneInput = document.querySelector("#phone"),
@@ -30,6 +32,7 @@ const cartButton = document.querySelector("#cart-button"),
     modalBody = document.querySelector(".modal-body"),
     modalPrice = document.querySelector(".modal-pricetag"),
     basketCount = document.querySelector(".basketCount"),
+    infoCount = document.querySelector(".infoCount"),
     buttonClearCart = document.querySelector(".clear-cart");
 
 
@@ -69,6 +72,11 @@ function toggleModal() {
 function toggleModalAuth() {
     loginInput.style.borderColor = "";
     modalAuth.classList.toggle('is-open');
+}
+
+function toggleModalInfo() {
+    modalInfo.classList.toggle('is-open');
+    infoCount.innerHTML = "";
 }
 
 
@@ -479,12 +487,16 @@ buttonOrder.addEventListener("click", function () {
     console.log(localStorage.getItem("allCart"));
     var data = JSON.parse(localStorage.getItem("allCart"));
     console.log(data);
-    // sendRequest('POST', urlOrders, requestBody)
     sendRequest('POST', urlOrders, data)
-        .then(r => alert('Получен новый заказ №: ' + r));
+        .then(r => infoCount.innerHTML = "Ваш заказ принят. Номер заказа " + r)
+        .catch(() => infoCount.innerHTML = "Ошибка, повторите попыту позже");
 
     localStorage.removeItem("allCart");
     buttonClearCart.click();
+    toggleModalInfo();
+    closeInfo.addEventListener("click", toggleModalInfo);
+
+
 });
 
 

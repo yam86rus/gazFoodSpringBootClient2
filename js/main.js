@@ -1,7 +1,7 @@
 'use strict';
-const urlCafeterias = 'http://localhost:8077/api/cafeterias';
-const urlDishes = 'http://localhost:8077/api/trololo/';
-const urlOrders = 'http://localhost:8077/api/orders';
+const urlCafeterias = 'http://169.168.9.81:8077/api/cafeterias';
+const urlDishes = 'http://169.168.9.81:8077/api/trololo/';
+const urlOrders = 'http://169.168.9.81:8077/api/orders';
 
 const cartButton = document.querySelector("#cart-button"),
     modal = document.querySelector(".modal"),
